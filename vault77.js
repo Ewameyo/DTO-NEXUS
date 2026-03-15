@@ -1,9 +1,9 @@
 export const firebaseConfig = {
-    apiKey: "AIzaSy...", // Copy the long key from your Firebase settings
+    apiKey: "YOUR_API_KEY",
     authDomain: "dto-nexus.firebaseapp.com",
     databaseURL: "https://dto-nexus-default-rtdb.firebaseio.com",
     projectId: "dto-nexus",
     storageBucket: "dto-nexus.appspot.com",
-    messagingSenderId: "...", // Found in Firebase Project Settings
-    appId: "..." // Found in Firebase Project Settings
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
 };
