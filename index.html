@@ -158,26 +158,26 @@
             }
         };
 
-        // 📈 HIGH-FREQUENCY TELEMETRY UPDATES
+        // 📈 HIGH-FREQUENCY TELEMETRY UPDATES (Live Changing Figures)
         function updateStats() {
-            // Realistic Bitcoin & KES jitter
             let btcBase = 68421;
             let kesBase = 128.42;
             
             setInterval(() => {
-                let btcChange = (Math.random() * 20) - 10;
-                let kesChange = (Math.random() * 0.05) - 0.025;
+                // Generate high-frequency jitter
+                let btcJitter = (Math.random() * 40) - 20;
+                let kesJitter = (Math.random() * 0.10) - 0.05;
                 
-                document.getElementById('val-btc').innerText = "BTC $" + (btcBase + btcChange).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
-                document.getElementById('val-kes').innerText = "KES " + (kesBase + kesChange).toFixed(2);
+                document.getElementById('val-btc').innerText = "BTC $" + (btcBase + btcJitter).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+                document.getElementById('val-kes').innerText = "KES " + (kesBase + kesJitter).toFixed(2);
                 
-                // Keep base moving slowly
-                btcBase += (Math.random() * 2) - 1;
-            }, 800); // Fast 800ms refresh for "moving" feel
+                // Slowly drift the base price every few cycles to keep it realistic
+                if(Math.random() > 0.95) btcBase += (Math.random() * 5) - 2.5;
+            }, 400); // 400ms refresh for a high-intensity live feel
         }
         updateStats();
 
-        // 🏛️ MATRIX BACKGROUND (Subtle)
+        // 🏛️ MATRIX BACKGROUND (Industrial Green)
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
