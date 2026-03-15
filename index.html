@@ -11,7 +11,6 @@
             --sovereign-gold: #d6b761;
             --deep-shield: #010409;
             --alert-red: #ff3e3e;
-            --data-blue: #00d4ff;
         }
 
         body, html {
@@ -33,7 +32,6 @@
             position: relative;
         }
 
-        /* TOP COMMAND BAR */
         .command-bar {
             padding: 10px 25px;
             background: rgba(46, 160, 67, 0.05);
@@ -55,7 +53,6 @@
             margin: 0; letter-spacing: -1px;
         }
 
-        /* ADVANCED LIVE GRID */
         .node-grid {
             display: grid; grid-template-columns: repeat(4, 1fr);
             gap: 1px; background: rgba(214, 183, 97, 0.1); flex-grow: 1;
@@ -65,15 +62,11 @@
             background: var(--deep-shield); padding: 20px;
             display: flex; flex-direction: column;
             position: relative; border: 1px solid transparent;
-            transition: 0.3s;
         }
-
-        .node-card:hover { background: rgba(46, 160, 67, 0.03); }
 
         .node-label { color: var(--sovereign-gold); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;}
         .node-value { font-size: 1.3rem; font-weight: bold; color: #fff; font-family: 'Orbitron', sans-serif; margin-bottom: 10px; }
 
-        /* SPARKLINE CHART STYLING */
         .chart-container { width: 100%; height: 40px; margin-top: auto; }
         polyline { fill: none; stroke: var(--lss-green); stroke-width: 2; }
         
@@ -101,7 +94,7 @@
     <div class="nexus-interface">
         <div class="command-bar">
             <div id="sys-clock" style="font-size: 0.8rem; color: var(--lss-green);">00:00:00 UTC</div>
-            <div style="font-size: 0.7rem; color: var(--sovereign-gold); font-weight: bold;">PATENT PENDING: DTO-GLOBAL-NEXUS-2026</div>
+            <div style="font-size: 0.7rem; color: var(--sovereign-gold); font-weight: bold;">PATENT: DTO-GLOBAL-NEXUS-2026-SOVEREIGN</div>
             <div style="font-size: 0.7rem; color: var(--lss-green);"><span class="status-dot"></span>SYSTEM STATUS: OPTIMAL</div>
         </div>
 
@@ -156,52 +149,37 @@
         </div>
 
         <div style="padding: 15px 25px; font-size: 0.65rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05);">
-            <div>GEO-HUB: NAIROBI / FRANKFURT / GLOBAL NEXUS</div>
-            <div style="color: var(--sovereign-gold); font-weight: bold; font-style: italic;">"Lead by the Holy Spirit. Architected for Global Impact."</div>
+            <div>GEO-HUB: NAIROBI COMMAND CENTER</div>
+            <div style="color: var(--sovereign-gold); font-weight: bold; letter-spacing: 2px;">HOLY GHOST CHIEF ARCHITECT</div>
             <div style="color: #555;">ENGINEERED BY EDGAR WAMEYO | ALL RIGHTS RESERVED 2026</div>
         </div>
     </div>
 
     <script>
-        // 🕒 REAL-TIME CLOCK
-        function updateClock() {
-            document.getElementById('sys-clock').innerText = new Date().toUTCString();
-        }
+        function updateClock() { document.getElementById('sys-clock').innerText = new Date().toUTCString(); }
         setInterval(updateClock, 1000);
 
-        // 📊 ADVANCED SPARKLINE GENERATOR
-        function createSparkline(elementId, baseVal, variance, count = 10) {
+        function createSparkline(elementId, variance) {
             let points = "";
-            for (let i = 0; i <= count; i++) {
-                let x = (i * (100 / count));
+            for (let i = 0; i <= 10; i++) {
+                let x = (i * 10);
                 let y = 15 + (Math.random() * variance - (variance/2));
                 points += `${x},${y} `;
             }
             document.getElementById(elementId).setAttribute("points", points);
         }
 
-        // 📈 LIVE DATA FEEDS
         function updateFeeds() {
-            let btc = 68403;
-            let kes = 128.40;
-            let oee = 98.4;
-
+            let btc = 68403; let kes = 128.40; let oee = 98.4;
             setInterval(() => {
-                let btcChange = (Math.random() * 40) - 20;
-                let kesChange = (Math.random() * 0.10) - 0.05;
-                
-                document.getElementById('val-btc').innerText = "BTC $" + (btc + btcChange).toLocaleString(undefined, {maximumFractionDigits:0});
-                document.getElementById('val-kes').innerText = "KES " + (kes + kesChange).toFixed(2);
-                document.getElementById('val-oee').innerText = (oee + (Math.random()*0.4 - 0.2)).toFixed(1) + "%";
-
-                createSparkline('chart-btc', 15, 20);
-                createSparkline('chart-kes', 15, 10);
-                createSparkline('chart-oee', 15, 5);
+                document.getElementById('val-btc').innerText = "BTC $" + (btc + (Math.random()*40-20)).toLocaleString(undefined, {maximumFractionDigits:0});
+                document.getElementById('val-kes').innerText = "KES " + (kes + (Math.random()*0.1-0.05)).toFixed(2);
+                document.getElementById('val-oee').innerText = (oee + (Math.random()*0.4-0.2)).toFixed(1) + "%";
+                createSparkline('chart-btc', 20); createSparkline('chart-kes', 10); createSparkline('chart-oee', 5);
             }, 800);
         }
         updateFeeds();
 
-        // 🏛️ MATRIX CORE
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -224,7 +202,6 @@
         }
         setInterval(draw, 35);
 
-        // 🛡️ ANTI-BREACH
         document.onkeydown = (e) => {
             if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74))) {
                 document.getElementById('security-alert').style.display = 'flex';
