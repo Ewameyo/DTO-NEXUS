@@ -55,7 +55,7 @@
     <canvas id="matrix"></canvas>
     <div class="nexus-interface">
         <div class="command-bar">
-            <div id="sys-clock" style="font-size: 0.8rem; color: var(--lss-green);">00:00:00 UTC</div>
+            <div id="sys-clock" style="font-size: 0.8rem; color: var(--lss-green);">00:00:00 EAT</div>
             <div style="font-size: 0.7rem; color: var(--sovereign-gold); font-weight: bold;">PATENT: DTO-GLOBAL-NEXUS-2026-SOVEREIGN</div>
             <div style="font-size: 0.7rem; color: var(--lss-green);"><span class="status-dot"></span>SYSTEM STATUS: OPTIMAL</div>
         </div>
@@ -92,10 +92,19 @@
     </div>
 
     <script type="module">
-        // THIS LINE IS THE KEY - IT USES YOUR EXTERNAL vault77.js
-        import { firebaseConfig } from "./vault77.js";
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // CONSOLIDATED CONFIG (REPLACE WITH YOUR ACTUAL KEYS TO STOP LOADING)
+        const firebaseConfig = {
+            apiKey: "AIzaSy...", 
+            authDomain: "dto-nexus.firebaseapp.com",
+            databaseURL: "https://dto-nexus-default-rtdb.firebaseio.com",
+            projectId: "dto-nexus",
+            storageBucket: "dto-nexus.appspot.com",
+            messagingSenderId: "...",
+            appId: "..."
+        };
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
@@ -124,7 +133,12 @@
             }
         });
 
-        setInterval(() => { document.getElementById('sys-clock').innerText = new Date().toUTCString(); }, 1000);
+        // EAST AFRICA TIME (EAT) CLOCK LOGIC
+        setInterval(() => { 
+            const now = new Date();
+            const eatTime = now.toLocaleTimeString('en-GB', { timeZone: 'Africa/Nairobi' });
+            document.getElementById('sys-clock').innerText = eatTime + " EAT"; 
+        }, 1000);
     </script>
 </body>
 </html>
