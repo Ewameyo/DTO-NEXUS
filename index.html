@@ -125,4 +125,126 @@
             <div class="node-card">
                 <div class="node-label">Pharma/Chemical Index</div>
                 <div class="node-value" id="val-pharma">LOADING...</div>
-                <div class="chart-container"><svg viewBox="0 0 100 30"><polyline id="
+                <div class="chart-container"><svg viewBox="0 0 100 30"><polyline id="chart-pharma" points=""/></svg></div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Global Industry Standards</div>
+                <div class="node-value">ISO 9001:2026</div>
+                <div style="font-size: 0.6rem; color: var(--lss-green); margin-top: auto;">COMPLIANCE VERIFIED ●</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Nairobi HQ Status</div>
+                <div class="node-value" style="color: var(--sovereign-gold);">COMMAND</div>
+                <div style="font-size: 0.6rem; color: #444;">LAT: -1.2921 | LON: 36.8219</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Divine Guidance</div>
+                <div class="node-value">100% STABLE</div>
+                <div style="font-size: 0.6rem; color: var(--sovereign-gold); text-align: center; margin-top: auto;">ALPHA & OMEGA ARCHITECTURE</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">OEE Efficiency</div>
+                <div class="node-value" id="val-oee">LOADING...</div>
+                <div class="chart-container"><svg viewBox="0 0 100 30"><polyline id="chart-oee" points=""/></svg></div>
+            </div>
+            <div class="node-card" style="border-color: var(--alert-red);">
+                <div class="node-label" style="color: var(--alert-red);">Security Protocol</div>
+                <div class="node-value" style="color: var(--alert-red);">SECURED</div>
+                <div style="font-size: 0.6rem; color: var(--alert-red); animation: blink 1s infinite;">QUANTUM ENCRYPTION ACTIVE</div>
+            </div>
+        </div>
+
+        <div style="padding: 15px 25px; font-size: 0.65rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05);">
+            <div>GEO-HUB: NAIROBI COMMAND CENTER</div>
+            <div style="color: var(--sovereign-gold); font-weight: bold; letter-spacing: 2px;">HOLY GHOST CHIEF ARCHITECT</div>
+            <div style="color: #555;">ENGINEERED BY EDGAR WAMEYO | ALL RIGHTS RESERVED 2026</div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // REPLACE THE DATA BELOW WITH YOUR ACTUAL FIREBASE CONFIG
+        const firebaseConfig = {
+            apiKey: "AIzaSy...", 
+            authDomain: "dto-nexus.firebaseapp.com",
+            databaseURL: "https://dto-nexus-default-rtdb.firebaseio.com",
+            projectId: "dto-nexus",
+            storageBucket: "dto-nexus.appspot.com",
+            messagingSenderId: "...",
+            appId: "..."
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const statsRef = ref(db, 'nairobi_hq/telemetry');
+
+        // Sparkline Generator Function
+        function updateSparkline(id, variance) {
+            let points = "";
+            for (let i = 0; i <= 10; i++) {
+                let x = (i * 10);
+                let y = 15 + (Math.random() * variance - (variance/2));
+                points += `${x},${y} `;
+            }
+            const el = document.getElementById(id);
+            if(el) el.setAttribute("points", points);
+        }
+
+        // Live Data Listener
+        onValue(statsRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                document.getElementById('val-kes').innerText = "KES " + data.kes.toFixed(2);
+                document.getElementById('val-btc').innerText = "BTC $" + data.btc.toLocaleString();
+                document.getElementById('val-pharma').innerText = data.pharma + " pts";
+                document.getElementById('val-oee').innerText = data.oee.toFixed(1) + "%";
+                
+                updateSparkline('chart-kes', 10);
+                updateSparkline('chart-btc', 20);
+                updateSparkline('chart-oee', 5);
+                updateSparkline('chart-pharma', 12);
+            }
+        });
+
+        // Clock Update
+        setInterval(() => {
+            document.getElementById('sys-clock').innerText = new Date().toUTCString();
+        }, 1000);
+    </script>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const letters = "LSSBBΣΩ777WAMEYODTO01";
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function draw() {
+            ctx.fillStyle = "rgba(1, 4, 9, 0.08)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#2ea043";
+            ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 35);
+
+        // Security Protocol
+        document.onkeydown = (e) => {
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74))) {
+                document.getElementById('security-alert').style.display = 'flex';
+                setTimeout(() => { window.location.href = "about:blank"; }, 2000);
+                return false;
+            }
+        };
+    </script>
+</body>
+</html>
