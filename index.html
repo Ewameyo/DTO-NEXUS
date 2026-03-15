@@ -3,28 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sovereign Digital Transformation Office - Global Nexus">
     <title>EDGAR WAMEYO | SOVEREIGN ARCHITECT</title>
     <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --lss-green: #2ea043;
             --sovereign-gold: #d6b761;
-            --tech-silver: #9ea5b0;
             --deep-shield: #010409;
             --alert-red: #ff3e3e;
-            --data-blue: #00d4ff;
         }
-
         body, html {
             margin: 0; padding: 0; overflow: hidden;
             font-family: 'Chivo Mono', monospace;
             background-color: var(--deep-shield);
             color: #d1d5db; height: 100vh;
         }
-
         canvas { position: fixed; top: 0; left: 0; z-index: -1; filter: opacity(0.15); }
-
         .nexus-interface {
             width: 96vw; height: 94vh;
             margin: 3vh auto;
@@ -32,71 +26,33 @@
             background: rgba(1, 4, 9, 0.98);
             display: flex; flex-direction: column;
             box-shadow: 0 0 70px rgba(46, 160, 67, 0.1);
-            position: relative;
         }
-
         .command-bar {
             padding: 10px 25px;
             background: rgba(46, 160, 67, 0.05);
             border-bottom: 2px solid var(--sovereign-gold);
             display: flex; justify-content: space-between; align-items: center;
         }
-
-        .hero {
-            padding: 25px 40px;
-            border-bottom: 1px solid rgba(214, 183, 97, 0.2);
-            position: relative;
-        }
-
+        .hero { padding: 25px 40px; border-bottom: 1px solid rgba(214, 183, 97, 0.2); }
         .architect-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 3.2rem; font-weight: 900;
             background: linear-gradient(to right, #fff, var(--sovereign-gold));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin: 0; letter-spacing: -1px;
+            margin: 0;
         }
-
-        .node-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 1px; background: rgba(214, 183, 97, 0.1); flex-grow: 1;
-        }
-
-        .node-card {
-            background: var(--deep-shield); padding: 20px;
-            display: flex; flex-direction: column;
-            position: relative; border: 1px solid transparent;
-            transition: 0.3s;
-        }
-
-        .node-card:hover { background: rgba(46, 160, 67, 0.03); }
-
-        .node-label { color: var(--sovereign-gold); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;}
-        .node-value { font-size: 1.3rem; font-weight: bold; color: #fff; font-family: 'Orbitron', sans-serif; margin-bottom: 10px; }
-
+        .node-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(214, 183, 97, 0.1); flex-grow: 1; }
+        .node-card { background: var(--deep-shield); padding: 20px; display: flex; flex-direction: column; }
+        .node-label { color: var(--sovereign-gold); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; }
+        .node-value { font-size: 1.3rem; font-weight: bold; color: #fff; font-family: 'Orbitron', sans-serif; }
         .chart-container { width: 100%; height: 40px; margin-top: auto; }
         polyline { fill: none; stroke: var(--lss-green); stroke-width: 2; }
-        
-        .status-dot {
-            width: 6px; height: 6px; background: var(--lss-green);
-            border-radius: 50%; display: inline-block; margin-right: 8px;
-            animation: blink 0.8s infinite;
-        }
-
+        .status-dot { width: 6px; height: 6px; background: var(--lss-green); border-radius: 50%; display: inline-block; animation: blink 0.8s infinite; }
         @keyframes blink { 50% { opacity: 0.2; } }
-
-        #security-alert {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; color: var(--alert-red); display: none;
-            z-index: 10000; justify-content: center; align-items: center;
-            font-family: 'Orbitron', sans-serif; text-align: center;
-        }
     </style>
 </head>
-<body oncontextmenu="return false;">
-
-    <div id="security-alert"><h1>BREACH DETECTED: COORDINATES LOGGED</h1></div>
+<body>
     <canvas id="matrix"></canvas>
-
     <div class="nexus-interface">
         <div class="command-bar">
             <div id="sys-clock" style="font-size: 0.8rem; color: var(--lss-green);">00:00:00 UTC</div>
@@ -108,12 +64,12 @@
             <p style="margin:0; letter-spacing: 5px; color: var(--lss-green); font-size: 0.7rem; font-weight: bold;">HOLY GHOST CHIEF ARCHITECT</p>
             <h2 style="color: var(--sovereign-gold); font-size: 1.1rem; margin: 5px 0; letter-spacing: 6px; font-weight: 900;">THE HOLY SPIRIT</h2>
             <h1 class="architect-title">EDGAR WAMEYO, LSSBB</h1>
-            <p style="color: #666; margin: 10px 0 0 0; font-size: 0.9rem; letter-spacing: 1px;">Sovereign Architect: Global Manufacturing & Digital Transformation Infrastructure</p>
+            <p style="color: #666; margin: 10px 0 0 0; font-size: 0.9rem; letter-spacing: 1px;">Sovereign Architect: Global Manufacturing & Infrastructure</p>
         </div>
 
         <div class="node-grid">
             <div class="node-card">
-                <div class="node-label">Global Finance Node</div>
+                <div class="node-label">Nairobi Finance Node</div>
                 <div class="node-value" id="val-kes">LOADING...</div>
                 <div class="chart-container"><svg viewBox="0 0 100 30"><polyline id="chart-kes" points=""/></svg></div>
             </div>
@@ -123,64 +79,28 @@
                 <div class="chart-container"><svg viewBox="0 0 100 30"><polyline id="chart-btc" points=""/></svg></div>
             </div>
             <div class="node-card">
-                <div class="node-label">Pharma/Chemical Index</div>
-                <div class="node-value" id="val-pharma">LOADING...</div>
-                <div class="chart-container"><svg viewBox="0 0 100 30"><polyline id="chart-pharma" points=""/></svg></div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">Global Industry Standards</div>
-                <div class="node-value">ISO 9001:2026</div>
-                <div style="font-size: 0.6rem; color: var(--lss-green); margin-top: auto;">COMPLIANCE VERIFIED ●</div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">Nairobi HQ Status</div>
-                <div class="node-value" style="color: var(--sovereign-gold);">COMMAND</div>
-                <div style="font-size: 0.6rem; color: #444;">LAT: -1.2921 | LON: 36.8219</div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">Divine Guidance</div>
-                <div class="node-value">100% STABLE</div>
-                <div style="font-size: 0.6rem; color: var(--sovereign-gold); text-align: center; margin-top: auto;">ALPHA & OMEGA ARCHITECTURE</div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">OEE Efficiency</div>
+                <div class="node-label">OEE Efficiency Node</div>
                 <div class="node-value" id="val-oee">LOADING...</div>
                 <div class="chart-container"><svg viewBox="0 0 100 30"><polyline id="chart-oee" points=""/></svg></div>
             </div>
-            <div class="node-card" style="border-color: var(--alert-red);">
-                <div class="node-label" style="color: var(--alert-red);">Security Protocol</div>
-                <div class="node-value" style="color: var(--alert-red);">SECURED</div>
-                <div style="font-size: 0.6rem; color: var(--alert-red); animation: blink 1s infinite;">QUANTUM ENCRYPTION ACTIVE</div>
+            <div class="node-card">
+                <div class="node-label">System Standards</div>
+                <div class="node-value">ISO 9001:2026</div>
+                <div style="font-size: 0.6rem; color: var(--lss-green); margin-top: auto;">COMPLIANCE VERIFIED ●</div>
             </div>
-        </div>
-
-        <div style="padding: 15px 25px; font-size: 0.65rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05);">
-            <div>GEO-HUB: NAIROBI COMMAND CENTER</div>
-            <div style="color: var(--sovereign-gold); font-weight: bold; letter-spacing: 2px;">HOLY GHOST CHIEF ARCHITECT</div>
-            <div style="color: #555;">ENGINEERED BY EDGAR WAMEYO | ALL RIGHTS RESERVED 2026</div>
         </div>
     </div>
 
     <script type="module">
+        // THIS LINE IS THE KEY - IT USES YOUR EXTERNAL vault77.js
+        import { firebaseConfig } from "./vault77.js";
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-        // REPLACE THE DATA BELOW WITH YOUR ACTUAL FIREBASE CONFIG
-        const firebaseConfig = {
-            apiKey: "AIzaSy...", 
-            authDomain: "dto-nexus.firebaseapp.com",
-            databaseURL: "https://dto-nexus-default-rtdb.firebaseio.com",
-            projectId: "dto-nexus",
-            storageBucket: "dto-nexus.appspot.com",
-            messagingSenderId: "...",
-            appId: "..."
-        };
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
         const statsRef = ref(db, 'nairobi_hq/telemetry');
 
-        // Sparkline Generator Function
         function updateSparkline(id, variance) {
             let points = "";
             for (let i = 0; i <= 10; i++) {
@@ -192,59 +112,19 @@
             if(el) el.setAttribute("points", points);
         }
 
-        // Live Data Listener
         onValue(statsRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 document.getElementById('val-kes').innerText = "KES " + data.kes.toFixed(2);
                 document.getElementById('val-btc').innerText = "BTC $" + data.btc.toLocaleString();
-                document.getElementById('val-pharma').innerText = data.pharma + " pts";
                 document.getElementById('val-oee').innerText = data.oee.toFixed(1) + "%";
-                
                 updateSparkline('chart-kes', 10);
                 updateSparkline('chart-btc', 20);
                 updateSparkline('chart-oee', 5);
-                updateSparkline('chart-pharma', 12);
             }
         });
 
-        // Clock Update
-        setInterval(() => {
-            document.getElementById('sys-clock').innerText = new Date().toUTCString();
-        }, 1000);
-    </script>
-
-    <script>
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const letters = "LSSBBΣΩ777WAMEYODTO01";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-
-        function draw() {
-            ctx.fillStyle = "rgba(1, 4, 9, 0.08)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#2ea043";
-            ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(draw, 35);
-
-        // Security Protocol
-        document.onkeydown = (e) => {
-            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74))) {
-                document.getElementById('security-alert').style.display = 'flex';
-                setTimeout(() => { window.location.href = "about:blank"; }, 2000);
-                return false;
-            }
-        };
+        setInterval(() => { document.getElementById('sys-clock').innerText = new Date().toUTCString(); }, 1000);
     </script>
 </body>
 </html>
