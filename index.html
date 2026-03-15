@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sovereign Digital Transformation Office - Global Nexus">
-    <title>EDGAR WAMEYO | SOVEREIGN ARCHITECT</title>
+    <title>EDGAR WAMEYO | INDUSTRIAL ARCHITECT</title>
     <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --lss-green: #2ea043;
             --sovereign-gold: #d6b761;
-            --starlink-blue: #0052cc;
+            --tech-silver: #9ea5b0;
             --deep-shield: #010409;
             --alert-red: #ff3e3e;
         }
@@ -22,177 +21,184 @@
             color: #d1d5db; height: 100vh;
         }
 
-        canvas { position: fixed; top: 0; left: 0; z-index: -1; filter: opacity(0.2); }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; filter: opacity(0.15); }
 
         .nexus-interface {
-            width: 95vw; height: 95vh;
-            margin: 2.5vh auto;
-            border: 1px solid rgba(46, 160, 67, 0.3);
-            background: rgba(1, 4, 9, 0.95);
+            width: 95vw; height: 90vh;
+            margin: 5vh auto;
+            border: 1px solid rgba(214, 183, 97, 0.3);
+            background: rgba(1, 4, 9, 0.98);
             display: flex; flex-direction: column;
-            box-shadow: 0 0 50px rgba(0, 82, 204, 0.2);
-            position: relative;
+            box-shadow: 0 0 40px rgba(214, 183, 97, 0.1);
         }
 
-        /* TOP COMMAND BAR */
         .command-bar {
-            padding: 15px 25px;
-            background: rgba(0, 82, 204, 0.1);
-            border-bottom: 2px solid var(--sovereign-gold);
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--sovereign-gold);
             display: flex; justify-content: space-between; align-items: center;
         }
 
-        .patent-tag { color: var(--sovereign-gold); font-size: 0.7rem; font-weight: bold; letter-spacing: 2px; }
-        .system-status { color: var(--lss-green); font-size: 0.8rem; animation: blink 2s infinite; }
-
-        /* HERO BRANDING */
         .hero {
-            padding: 40px; text-align: center;
-            border-bottom: 1px solid rgba(214, 183, 97, 0.2);
+            padding: 50px 40px; text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .architect-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 4rem; font-weight: 900;
-            background: linear-gradient(to right, #fff, var(--sovereign-gold));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin: 0; letter-spacing: -2px;
+            font-size: 3.5rem; font-weight: 900;
+            color: #fff; margin: 0; letter-spacing: -1px;
         }
 
-        .supreme-honour {
-            color: var(--sovereign-gold); font-size: 1.2rem;
-            margin-top: 10px; font-weight: bold; letter-spacing: 5px;
+        .sub-header {
+            color: var(--sovereign-gold); font-size: 1rem;
+            letter-spacing: 4px; text-transform: uppercase; margin-top: 5px;
         }
 
-        /* STARLINK NODE GRID */
+        /* MANUFACTURING GRID */
         .node-grid {
             display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 20px; padding: 30px; flex-grow: 1;
+            gap: 1px; background: rgba(255,255,255,0.1); flex-grow: 1;
         }
 
         .node-card {
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 20px; background: rgba(255,255,255,0.02);
-            transition: 0.3s;
+            background: var(--deep-shield); padding: 25px;
+            display: flex; flex-direction: column; justify-content: center;
         }
 
-        .node-card:hover { border-color: var(--starlink-blue); background: rgba(0, 82, 204, 0.05); }
+        .node-label { color: var(--tech-silver); font-size: 0.65rem; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px;}
+        .node-value { font-size: 1.4rem; font-weight: bold; color: var(--lss-green); font-family: 'Orbitron', sans-serif; }
+        
+        .live-indicator {
+            width: 8px; height: 8px; background: var(--lss-green);
+            border-radius: 50%; display: inline-block; margin-right: 10px;
+            box-shadow: 0 0 10px var(--lss-green);
+        }
 
-        .node-label { color: var(--sovereign-gold); font-size: 0.7rem; text-transform: uppercase; margin-bottom: 10px; }
-        .node-value { font-size: 1.5rem; font-weight: bold; color: #fff; }
-
-        /* SECURITY OVERLAY */
         #security-alert {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: red; color: white; display: none;
+            background: #000; color: var(--alert-red); display: none;
             z-index: 9999; justify-content: center; align-items: center;
-            font-family: 'Orbitron', sans-serif; text-align: center;
+            font-family: 'Orbitron', sans-serif;
         }
-
-        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
-<body oncontextmenu="return false;"> <div id="security-alert">
-        <h1>BREACH DETECTED: PATENT VIOLATION</h1>
-        <p>COORDINATES LOGGED. SYSTEM DESTRUCT SEQUENCE INITIATED.</p>
+<body oncontextmenu="return false;">
+
+    <div id="security-alert">
+        <h1 style="border: 4px solid var(--alert-red); padding: 20px;">ACCESS DENIED: PATENT ENFORCEMENT ACTIVE</h1>
     </div>
 
     <canvas id="matrix"></canvas>
 
     <div class="nexus-interface">
         <div class="command-bar">
-            <div class="patent-tag">PATENT PENDING: DTO-NX-2026-SOVEREIGN</div>
-            <div class="system-status">● ENCRYPTED LINK: ACTIVE</div>
+            <div style="font-size: 0.7rem; letter-spacing: 2px;">SYSTEM_ID: WAMEYO-DTO-2026</div>
+            <div style="color: var(--sovereign-gold); font-size: 0.7rem;">[ INDUSTRIAL STANDARDS VERIFIED ]</div>
         </div>
 
         <div class="hero">
-            <p style="margin:0; letter-spacing: 3px; color: var(--lss-green);">CHIEF ARCHITECT OF THE UNIVERSE</p>
-            <h2 class="supreme-honour">THE HOLY SPIRIT</h2>
-            <h1 class="architect-title">EDGAR WAMEYO, LSSBB</h1>
-            <p style="font-size: 1.2rem; color: #888;">Global DTO Infrastructure & Pharma Strategy Master</p>
+            <h1 class="architect-title">EDGAR WAMEYO</h1>
+            <div class="sub-header">Master Black Belt | Industrial Systems Architect</div>
+            <p style="color: var(--tech-silver); max-width: 600px; margin-top: 20px; line-height: 1.6;">
+                Specializing in Global Manufacturing Optimization, Lean Six Sigma Governance, and 
+                Standardized Industrial Infrastructure.
+            </p>
         </div>
 
         <div class="node-grid">
             <div class="node-card">
                 <div class="node-label">Global Finance Node</div>
-                <div class="node-value" id="val-1">USD/KES 128.42</div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">Pharma Compliance Sync</div>
-                <div class="node-value">ISO-9001:2026</div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">Sovereign Security</div>
-                <div class="node-value">SIGMA-LEVEL 7</div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">Divine Guidance</div>
-                <div class="node-value">100% STABLE</div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">Frankfurt Hub Status</div>
-                <div class="node-value">LINKED</div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">Nairobi HQ Status</div>
-                <div class="node-value">COMMAND</div>
+                <div class="node-value" id="val-kes">KES 128.42</div>
             </div>
             <div class="node-card">
                 <div class="node-label">Asset Liquidity</div>
-                <div class="node-value" id="val-2">BTC $68,421</div>
+                <div class="node-value" id="val-btc">BTC $68,421</div>
             </div>
-            <div class="node-card" style="border-color: var(--alert-red);">
-                <div class="node-label" style="color: var(--alert-red);">Security Breach Protocol</div>
-                <div class="node-value">ACTIVE</div>
+            <div class="node-card">
+                <div class="node-label">Manufacturing Quality</div>
+                <div class="node-value">SIGMA 6.0</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Industrial Compliance</div>
+                <div class="node-value">ISO 9001:2026</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Nairobi Operational HQ</div>
+                <div class="node-value" style="color: var(--sovereign-gold);">ONLINE</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Orbital Connectivity Hub</div>
+                <div class="node-value" style="color: var(--sovereign-gold);">SYNCED</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">OEE Efficiency</div>
+                <div class="node-value">98.4%</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Process Integrity</div>
+                <div class="node-value">SECURED</div>
             </div>
         </div>
 
-        <div style="padding: 20px; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;">
-            <span>GEO-LOCATION: NAIROBI / FRANKFURT</span>
-            <span style="color: var(--sovereign-gold);">"Lead by the Holy Spirit. Architected for Global Impact."</span>
-            <span>METADATA PROTECTED BY QUANTUM ENCRYPTION</span>
+        <div style="padding: 20px; font-size: 0.7rem; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02);">
+            <div><span class="live-indicator"></span>LOCATION: NAIROBI COMMAND CENTER</div>
+            <div style="color: var(--tech-silver);">METADATA: CRYPTOGRAPHICALLY LOCKED</div>
+            <div style="color: var(--lss-green);">"Architected for Global Industrial Impact."</div>
         </div>
     </div>
 
     <script>
-        // 🛡️ SECURITY DESTRUCT PROTOCOL
+        // 🔒 ANTI-INSPECTION LOGIC
         document.onkeydown = function(e) {
             if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
                 document.getElementById('security-alert').style.display = 'flex';
-                // Symbolically "destroy" by redirecting to a warning or crashing the tab
-                setTimeout(() => { window.location.href = "about:blank"; }, 2000);
+                setTimeout(() => { window.location.href = "about:blank"; }, 1500);
                 return false;
             }
         };
 
-        // 📊 DYNAMIC NODE UPDATES
-        setInterval(() => {
-            document.getElementById('val-1').innerText = "USD/KES " + (128 + Math.random()).toFixed(2);
-            document.getElementById('val-2').innerText = "BTC $" + (68000 + Math.random()*500).toFixed(0);
-        }, 3000);
+        // 📈 HIGH-FREQUENCY TELEMETRY UPDATES
+        function updateStats() {
+            // Realistic Bitcoin & KES jitter
+            let btcBase = 68421;
+            let kesBase = 128.42;
+            
+            setInterval(() => {
+                let btcChange = (Math.random() * 20) - 10;
+                let kesChange = (Math.random() * 0.05) - 0.025;
+                
+                document.getElementById('val-btc').innerText = "BTC $" + (btcBase + btcChange).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+                document.getElementById('val-kes').innerText = "KES " + (kesBase + kesChange).toFixed(2);
+                
+                // Keep base moving slowly
+                btcBase += (Math.random() * 2) - 1;
+            }, 800); // Fast 800ms refresh for "moving" feel
+        }
+        updateStats();
 
-        // 🏛️ MATRIX RAIN
+        // 🏛️ MATRIX BACKGROUND (Subtle)
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const letters = "LSSBBΣΩ777WAMEYODTO";
-        const fontSize = 16;
+        const letters = "01WAMEYO6SIGMA";
+        const fontSize = 14;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
 
         function draw() {
-            ctx.fillStyle = "rgba(1, 4, 9, 0.05)";
+            ctx.fillStyle = "rgba(1, 4, 9, 0.1)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#2ea043";
+            ctx.fillStyle = "#1a5c26";
             ctx.font = fontSize + "px monospace";
             for (let i = 0; i < drops.length; i++) {
                 const text = letters.charAt(Math.floor(Math.random() * letters.length));
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.985) drops[i] = 0;
                 drops[i]++;
             }
         }
-        setInterval(draw, 33);
+        setInterval(draw, 50);
     </script>
 </body>
 </html>
