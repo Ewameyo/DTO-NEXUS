@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VAULT-77 | INDUSTRIAL TELEMETRY</title>
+    <style>
+        body { background: #050505; color: #00ffcc; font-family: 'Courier New', monospace; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .panel { border: 1px solid #00ffcc; padding: 20px; background: rgba(0, 50, 50, 0.2); box-shadow: 0 0 15px rgba(0, 255, 204, 0.1); }
+        .header { border-bottom: 2px solid #00ffcc; margin-bottom: 20px; display: flex; justify-content: space-between; }
+        .stat { font-size: 2rem; color: #fff; }
+        .label { font-size: 0.8rem; text-transform: uppercase; color: #00ffcc; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>NEXUS COMMAND: VAULT-77</h1>
+        <div id="clock">18:27:35 EAT</div>
+    </div>
+
+    <div class="grid">
+        <div class="panel">
+            <div class="label">Pharma/Chemical Index</div>
+            <div class="stat" id="pharma-val">LOADING...</div>
+            <div class="label">Targeting: 10,000+ Employee Multi-Nationals</div>
+        </div>
+
+        <div class="panel">
+            <div class="label">USD / KES Real-Time</div>
+            <div class="stat" id="kes-val">129.4200</div>
+            <div class="label">Source: Nairobi Central Node</div>
+        </div>
+
+        <div class="panel">
+            <div class="label">Global BTC/USD</div>
+            <div class="stat" id="btc-val">$67,432</div>
+            <div class="label">Market Status: High Volatility</div>
+        </div>
+    </div>
+
+    <div class="panel" style="margin-top:20px; height: 400px;">
+        <div class="label">Global Manufacturing Analytics</div>
+        <div id="tradingview_chart" style="height: 350px;"></div>
+    </div>
+
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+        // Real-time Simulation for Business Logic
+        setInterval(() => {
+            document.getElementById('kes-val').innerText = (129 + Math.random()).toFixed(4);
+            document.getElementById('pharma-val').innerText = (8420 + Math.random()*100).toFixed(2) + " pts";
+        }, 2000);
+
+        new TradingView.widget({
+            "autosize": true,
+            "symbol": "BINANCE:BTCUSDT",
+            "interval": "D",
+            "timezone": "Africa/Nairobi",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": false,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "container_id": "tradingview_chart"
+        });
+    </script>
+</body>
+</html>

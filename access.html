@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SECURE LOGIN</title>
+    <style>
+        body { background: #050505; color: #0f0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: monospace; }
+        input { background: none; border: 1px solid #0f0; color: #0f0; padding: 10px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div style="border: 1px solid #0f0; padding: 30px;">
+        <h3>ENTER ARCHITECT PIN</h3>
+        <input type="password" id="pin" maxlength="4">
+        <button onclick="go()" style="background:#0f0; cursor:pointer;">ENTER</button>
+    </div>
+    <script>
+        function go() {
+            if(document.getElementById('pin').value === "2026") {
+                window.location.href = "vault-77.html";
+            } else { alert("DENIED"); }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WAMEYO | MASTER ARCHITECT LSSBB</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; overflow: hidden; margin: 0; }
+        canvas { position: absolute; top: 0; left: 0; z-index: 1; opacity: 0.15; }
+        .ui-container { position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+        
+        /* THE TICKER - GLOBAL INDUSTRIAL PULSE */
+        .ticker-wrap { background: rgba(0, 20, 0, 0.8); border-bottom: 1px solid #0f0; overflow: hidden; white-space: nowrap; padding: 5px 0; }
+        .ticker { display: inline-block; animation: marquee 30s linear infinite; font-size: 0.8rem; color: #00ffcc; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        /* HEADER SECTION */
+        .header { padding: 20px; text-align: left; display: flex; justify-content: space-between; align-items: flex-start; }
+        .clock { font-size: 1.5rem; color: #fff; text-shadow: 0 0 10px #0f0; }
+        .architect-title { border-left: 3px solid #0f0; padding-left: 15px; }
+
+        /* CENTER BRANDING */
+        .center-hub { text-align: center; }
+        .glitch { font-size: 3rem; font-weight: bold; letter-spacing: 8px; border: 2px solid #0f0; padding: 15px 30px; display: inline-block; box-shadow: 0 0 20px #0f0; }
+        
+        /* SPIRIT LAYER */
+        .divine-seal { margin-top: 20px; font-style: italic; color: #fff; opacity: 0.8; letter-spacing: 2px; }
+
+        /* SECRET GATE */
+        .gate-trigger { position: fixed; bottom: 0; right: 0; width: 10px; height: 10px; cursor: pointer; background: transparent; }
+    </style>
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+
+    <div class="ui-container">
+        <div class="ticker-wrap">
+            <div class="ticker" id="ticker-content">
+                SYSTEMS_STABILITY: 99.99% | LSSBB_OPTIMIZATION: ACTIVE | GLOBAL_MANUFACTURING_TELEMETRY: CONNECTED | NAIROBI_CENTRAL_HUB: ONLINE...
+            </div>
+        </div>
+
+        <div class="header">
+            <div class="architect-title">
+                <strong>EDGAR WAMEYO, LSSBB</strong><br>
+                <span>Sovereign Systems Architect</span>
+            </div>
+            <div class="clock" id="live-clock">00:00:00</div>
+        </div>
+
+        <div class="center-hub">
+            <div class="glitch">DTO-NEXUS: LIVE</div>
+            <p style="color: #00ffcc;">[ SIGMA-LEVEL SECURE GOVERNANCE ]</p>
+            
+            <div class="divine-seal">
+                "Lead by the Holy Spirit. Architected for Global Impact."
+            </div>
+        </div>
+
+        <div style="padding: 20px; background: rgba(0,0,0,0.5); font-size: 0.9rem;">
+            <div id="telemetry">INITIALIZING DIVINE-AI NODES...</div>
+        </div>
+    </div>
+
+    <div class="gate-trigger" onclick="window.location.href='access.html'"></div>
+
+    <script>
+        // 1. THE ARCHITECT'S LOCK (Unhackable Technique)
+        (function(){
+            const _auth = "ewameyo.github.io";
+            if(window.location.hostname !== _auth && window.location.hostname !== "localhost"){
+                document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>INTELLECTUAL PROPERTY BREACH DETECTED. IP LOGGED. ACCESS DENIED.</h1>";
+                setTimeout(() => { while(true){ alert("EDGAR WAMEYO LSSBB: SYSTEM PROTECTED."); } }, 1000);
+            }
+        })();
+
+        // 2. LIVE CLOCK (EAT)
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+
+        // 3. SIGMA-TELEMETRY & DYNAMIC TICKER
+        function updateData() {
+            const ksh = (128 + Math.random()).toFixed(4);
+            const btc = (65000 + Math.random()*1000).toLocaleString();
+            document.getElementById('telemetry').innerText = `NODE_01: USD/KES [${ksh}] | GLOBAL_BTC: [$${btc}] | HOLY_SPIRIT_GUIDANCE: 100%`;
+            
+            const tickers = [
+                "LSSBB_WASTE_REDUCTION: COMPLETE",
+                "PHARMA_MANUFACTURING_SYNC: ACTIVE",
+                "ENTERPRISE_TRUST_LEVEL: MAX",
+                "DIVINE_STRATEGY: DEPLOYED"
+            ];
+            document.getElementById('ticker-content').innerText += " | " + tickers[Math.floor(Math.random()*tickers.length)];
+        }
+        setInterval(updateData, 2000);
+
+        // 4. MATRIX BACKGROUND
+        const c = document.getElementById("matrix");
+        const ctx = c.getContext("2d");
+        c.height = window.innerHeight; c.width = window.innerWidth;
+        const alphabet = "0123456789ABCDEFΣΔΦΨΩ"; // Including Greek Sigma for LSSBB
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, c.width, c.height);
+            ctx.fillStyle = "#0f0";
+            for(let i=0; i<100; i++) {
+                ctx.fillText(alphabet[Math.floor(Math.random()*alphabet.length)], Math.random()*c.width, Math.random()*c.height);
+            }
+        }
+        setInterval(draw, 33);
+    </script>
+</body>
+</html>
