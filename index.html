@@ -24,8 +24,8 @@
         canvas { position: fixed; top: 0; left: 0; z-index: -1; filter: opacity(0.15); }
 
         .nexus-interface {
-            width: 95vw; height: 90vh;
-            margin: 5vh auto;
+            width: 95vw; height: 92vh;
+            margin: 4vh auto;
             border: 1px solid rgba(214, 183, 97, 0.3);
             background: rgba(1, 4, 9, 0.98);
             display: flex; flex-direction: column;
@@ -40,7 +40,7 @@
         }
 
         .hero {
-            padding: 50px 40px; text-align: left;
+            padding: 40px; text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -51,7 +51,7 @@
         }
 
         .sub-header {
-            color: var(--sovereign-gold); font-size: 1rem;
+            color: var(--sovereign-gold); font-size: 1.1rem;
             letter-spacing: 4px; text-transform: uppercase; margin-top: 5px;
         }
 
@@ -64,6 +64,13 @@
         .node-card {
             background: var(--deep-shield); padding: 25px;
             display: flex; flex-direction: column; justify-content: center;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .node-card:hover {
+            background: rgba(46, 160, 67, 0.05);
+            border-color: var(--lss-green);
         }
 
         .node-label { color: var(--tech-silver); font-size: 0.65rem; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px;}
@@ -73,7 +80,10 @@
             width: 8px; height: 8px; background: var(--lss-green);
             border-radius: 50%; display: inline-block; margin-right: 10px;
             box-shadow: 0 0 10px var(--lss-green);
+            animation: pulse 1.5s infinite;
         }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         #security-alert {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -93,16 +103,17 @@
 
     <div class="nexus-interface">
         <div class="command-bar">
+            <div id="sys-clock" style="font-size: 0.8rem; color: var(--lss-green); font-family: 'Chivo Mono';">00:00:00 UTC</div>
             <div style="font-size: 0.7rem; letter-spacing: 2px;">SYSTEM_ID: WAMEYO-DTO-2026</div>
             <div style="color: var(--sovereign-gold); font-size: 0.7rem;">[ INDUSTRIAL STANDARDS VERIFIED ]</div>
         </div>
 
         <div class="hero">
-            <h1 class="architect-title">EDGAR WAMEYO</h1>
-            <div class="sub-header">Master Black Belt | Industrial Systems Architect</div>
-            <p style="color: var(--tech-silver); max-width: 600px; margin-top: 20px; line-height: 1.6;">
-                Specializing in Global Manufacturing Optimization, Lean Six Sigma Governance, and 
-                Standardized Industrial Infrastructure.
+            <h1 class="architect-title">EDGAR WAMEYO, LSSBB</h1>
+            <div class="sub-header">Industrial Systems Architect</div>
+            <p style="color: var(--tech-silver); max-width: 650px; margin-top: 20px; line-height: 1.6;">
+                Specializing in Global Manufacturing Optimization, Standardized Industrial Infrastructure, 
+                and Sovereign Digital Transformation Governance.
             </p>
         </div>
 
@@ -125,11 +136,11 @@
             </div>
             <div class="node-card">
                 <div class="node-label">Nairobi Operational HQ</div>
-                <div class="node-value" style="color: var(--sovereign-gold);">ONLINE</div>
+                <div class="node-value" style="color: var(--sovereign-gold);">COMMAND</div>
             </div>
             <div class="node-card">
-                <div class="node-label">Orbital Connectivity Hub</div>
-                <div class="node-value" style="color: var(--sovereign-gold);">SYNCED</div>
+                <div class="node-label">Strategic Growth Node</div>
+                <div class="node-value" style="color: var(--sovereign-gold);">STABLE</div>
             </div>
             <div class="node-card">
                 <div class="node-label">OEE Efficiency</div>
@@ -141,15 +152,23 @@
             </div>
         </div>
 
-        <div style="padding: 20px; font-size: 0.7rem; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02);">
+        <div style="padding: 20px; font-size: 0.7rem; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05);">
             <div><span class="live-indicator"></span>LOCATION: NAIROBI COMMAND CENTER</div>
             <div style="color: var(--tech-silver);">METADATA: CRYPTOGRAPHICALLY LOCKED</div>
-            <div style="color: var(--lss-green);">"Architected for Global Industrial Impact."</div>
+            <div style="color: var(--lss-green);">ENGINEERED BY EDGAR WAMEYO | "Architected for Global Industrial Impact."</div>
         </div>
     </div>
 
     <script>
-        // 🔒 ANTI-INSPECTION LOGIC
+        // 🕒 LIVE SYSTEM CLOCK
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('sys-clock').innerText = now.toUTCString().replace('GMT', 'UTC');
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 🔒 ANTI-INSPECTION
         document.onkeydown = function(e) {
             if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
                 document.getElementById('security-alert').style.display = 'flex';
@@ -158,30 +177,28 @@
             }
         };
 
-        // 📈 HIGH-FREQUENCY TELEMETRY UPDATES (Live Changing Figures)
+        // 📈 HIGH-FREQUENCY TELEMETRY (Live Changing Figures)
         function updateStats() {
             let btcBase = 68421;
             let kesBase = 128.42;
             
             setInterval(() => {
-                // Generate high-frequency jitter
-                let btcJitter = (Math.random() * 40) - 20;
-                let kesJitter = (Math.random() * 0.10) - 0.05;
+                let btcJitter = (Math.random() * 60) - 30;
+                let kesJitter = (Math.random() * 0.12) - 0.06;
                 
                 document.getElementById('val-btc').innerText = "BTC $" + (btcBase + btcJitter).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
                 document.getElementById('val-kes').innerText = "KES " + (kesBase + kesJitter).toFixed(2);
                 
-                // Slowly drift the base price every few cycles to keep it realistic
-                if(Math.random() > 0.95) btcBase += (Math.random() * 5) - 2.5;
-            }, 400); // 400ms refresh for a high-intensity live feel
+                if(Math.random() > 0.90) btcBase += (Math.random() * 4) - 2;
+            }, 400); 
         }
         updateStats();
 
-        // 🏛️ MATRIX BACKGROUND (Industrial Green)
+        // 🏛️ MATRIX BACKGROUND
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const letters = "01WAMEYO6SIGMA";
+        const letters = "01WAMEYO6SIGMA777";
         const fontSize = 14;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
