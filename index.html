@@ -35,7 +35,6 @@
             position: relative;
         }
 
-        /* TOP COMMAND BAR */
         .command-bar {
             padding: 10px 25px;
             background: rgba(46, 160, 67, 0.05);
@@ -57,7 +56,6 @@
             margin: 0; letter-spacing: -1px;
         }
 
-        /* ADVANCED LIVE GRID */
         .node-grid {
             display: grid; grid-template-columns: repeat(4, 1fr);
             gap: 1px; background: rgba(214, 183, 97, 0.1); flex-grow: 1;
@@ -75,7 +73,6 @@
         .node-label { color: var(--sovereign-gold); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;}
         .node-value { font-size: 1.3rem; font-weight: bold; color: #fff; font-family: 'Orbitron', sans-serif; margin-bottom: 10px; }
 
-        /* SPARKLINE CHART STYLING */
         .chart-container { width: 100%; height: 40px; margin-top: auto; }
         polyline { fill: none; stroke: var(--lss-green); stroke-width: 2; }
         
@@ -117,123 +114,15 @@
         <div class="node-grid">
             <div class="node-card">
                 <div class="node-label">Global Finance Node</div>
-                <div class="node-value" id="val-kes">KES 128.40</div>
+                <div class="node-value" id="val-kes">LOADING...</div>
                 <div class="chart-container"><svg viewBox="0 0 100 30"><polyline id="chart-kes" points=""/></svg></div>
             </div>
             <div class="node-card">
                 <div class="node-label">Asset Liquidity</div>
-                <div class="node-value" id="val-btc">BTC $68,403</div>
+                <div class="node-value" id="val-btc">LOADING...</div>
                 <div class="chart-container"><svg viewBox="0 0 100 30"><polyline id="chart-btc" points=""/></svg></div>
             </div>
             <div class="node-card">
-                <div class="node-label">Manufacturing Quality</div>
-                <div class="node-value">SIGMA 6.0</div>
-                <div class="chart-container"><svg viewBox="0 0 100 30"><polyline stroke="#d6b761" points="0,15 10,14 20,15 30,15 40,14 50,15 60,15 70,14 80,15 90,15 100,14"/></svg></div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">Global Industry Standards</div>
-                <div class="node-value">ISO 9001:2026</div>
-                <div style="font-size: 0.6rem; color: var(--lss-green); margin-top: auto;">COMPLIANCE VERIFIED ●</div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">Nairobi HQ Status</div>
-                <div class="node-value" style="color: var(--sovereign-gold);">COMMAND</div>
-                <div style="font-size: 0.6rem; color: #444;">LAT: -1.2921 | LON: 36.8219</div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">Divine Guidance</div>
-                <div class="node-value">100% STABLE</div>
-                <div style="font-size: 0.6rem; color: var(--sovereign-gold); text-align: center; margin-top: auto;">ALPHA & OMEGA ARCHITECTURE</div>
-            </div>
-            <div class="node-card">
-                <div class="node-label">OEE Efficiency</div>
-                <div class="node-value" id="val-oee">98.4%</div>
-                <div class="chart-container"><svg viewBox="0 0 100 30"><polyline id="chart-oee" points=""/></svg></div>
-            </div>
-            <div class="node-card" style="border-color: var(--alert-red);">
-                <div class="node-label" style="color: var(--alert-red);">Security Protocol</div>
-                <div class="node-value" style="color: var(--alert-red);">SECURED</div>
-                <div style="font-size: 0.6rem; color: var(--alert-red); animation: blink 1s infinite;">QUANTUM ENCRYPTION ACTIVE</div>
-            </div>
-        </div>
-
-        <div style="padding: 15px 25px; font-size: 0.65rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05);">
-            <div>GEO-HUB: NAIROBI COMMAND CENTER</div>
-            <div style="color: var(--sovereign-gold); font-weight: bold; letter-spacing: 2px;">HOLY GHOST CHIEF ARCHITECT</div>
-            <div style="color: #555;">ENGINEERED BY EDGAR WAMEYO | ALL RIGHTS RESERVED 2026</div>
-        </div>
-    </div>
-
-    <script>
-        // 🕒 REAL-TIME CLOCK
-        function updateClock() {
-            document.getElementById('sys-clock').innerText = new Date().toUTCString();
-        }
-        setInterval(updateClock, 1000);
-
-        // 📊 ADVANCED SPARKLINE GENERATOR
-        function createSparkline(elementId, baseVal, variance, count = 10) {
-            let points = "";
-            for (let i = 0; i <= count; i++) {
-                let x = (i * (100 / count));
-                let y = 15 + (Math.random() * variance - (variance/2));
-                points += `${x},${y} `;
-            }
-            document.getElementById(elementId).setAttribute("points", points);
-        }
-
-        // 📈 LIVE DATA FEEDS
-        function updateFeeds() {
-            let btc = 68403;
-            let kes = 128.40;
-            let oee = 98.4;
-
-            setInterval(() => {
-                let btcChange = (Math.random() * 40) - 20;
-                let kesChange = (Math.random() * 0.10) - 0.05;
-                
-                document.getElementById('val-btc').innerText = "BTC $" + (btc + btcChange).toLocaleString(undefined, {maximumFractionDigits:0});
-                document.getElementById('val-kes').innerText = "KES " + (kes + kesChange).toFixed(2);
-                document.getElementById('val-oee').innerText = (oee + (Math.random()*0.4 - 0.2)).toFixed(1) + "%";
-
-                createSparkline('chart-btc', 15, 20);
-                createSparkline('chart-kes', 15, 10);
-                createSparkline('chart-oee', 15, 5);
-            }, 800);
-        }
-        updateFeeds();
-
-        // 🏛️ MATRIX CORE
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const letters = "LSSBBΣΩ777WAMEYODTO01";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-
-        function draw() {
-            ctx.fillStyle = "rgba(1, 4, 9, 0.08)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#2ea043";
-            ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(draw, 35);
-
-        // 🛡️ ANTI-BREACH
-        document.onkeydown = (e) => {
-            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74))) {
-                document.getElementById('security-alert').style.display = 'flex';
-                setTimeout(() => { window.location.href = "about:blank"; }, 2000);
-                return false;
-            }
-        };
-    </script>
-</body>
-</html>
+                <div class="node-label">Pharma/Chemical Index</div>
+                <div class="node-value" id="val-pharma">LOADING...</div>
+                <div class="chart-container"><svg viewBox="0 0 100 30"><polyline id="
