@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sovereign Digital Transformation Office - Global Nexus">
     <title>EDGAR WAMEYO | SOVEREIGN ARCHITECT</title>
     <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --lss-green: #2ea043;
             --sovereign-gold: #d6b761;
+            --tech-silver: #9ea5b0;
             --deep-shield: #010409;
             --alert-red: #ff3e3e;
+            --data-blue: #00d4ff;
         }
 
         body, html {
@@ -32,6 +35,7 @@
             position: relative;
         }
 
+        /* TOP COMMAND BAR */
         .command-bar {
             padding: 10px 25px;
             background: rgba(46, 160, 67, 0.05);
@@ -53,6 +57,7 @@
             margin: 0; letter-spacing: -1px;
         }
 
+        /* ADVANCED LIVE GRID */
         .node-grid {
             display: grid; grid-template-columns: repeat(4, 1fr);
             gap: 1px; background: rgba(214, 183, 97, 0.1); flex-grow: 1;
@@ -62,11 +67,15 @@
             background: var(--deep-shield); padding: 20px;
             display: flex; flex-direction: column;
             position: relative; border: 1px solid transparent;
+            transition: 0.3s;
         }
+
+        .node-card:hover { background: rgba(46, 160, 67, 0.03); }
 
         .node-label { color: var(--sovereign-gold); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;}
         .node-value { font-size: 1.3rem; font-weight: bold; color: #fff; font-family: 'Orbitron', sans-serif; margin-bottom: 10px; }
 
+        /* SPARKLINE CHART STYLING */
         .chart-container { width: 100%; height: 40px; margin-top: auto; }
         polyline { fill: none; stroke: var(--lss-green); stroke-width: 2; }
         
@@ -82,7 +91,7 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; color: var(--alert-red); display: none;
             z-index: 10000; justify-content: center; align-items: center;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Orbitron', sans-serif; text-align: center;
         }
     </style>
 </head>
@@ -156,30 +165,45 @@
     </div>
 
     <script>
-        function updateClock() { document.getElementById('sys-clock').innerText = new Date().toUTCString(); }
+        // 🕒 REAL-TIME CLOCK
+        function updateClock() {
+            document.getElementById('sys-clock').innerText = new Date().toUTCString();
+        }
         setInterval(updateClock, 1000);
 
-        function createSparkline(elementId, variance) {
+        // 📊 ADVANCED SPARKLINE GENERATOR
+        function createSparkline(elementId, baseVal, variance, count = 10) {
             let points = "";
-            for (let i = 0; i <= 10; i++) {
-                let x = (i * 10);
+            for (let i = 0; i <= count; i++) {
+                let x = (i * (100 / count));
                 let y = 15 + (Math.random() * variance - (variance/2));
                 points += `${x},${y} `;
             }
             document.getElementById(elementId).setAttribute("points", points);
         }
 
+        // 📈 LIVE DATA FEEDS
         function updateFeeds() {
-            let btc = 68403; let kes = 128.40; let oee = 98.4;
+            let btc = 68403;
+            let kes = 128.40;
+            let oee = 98.4;
+
             setInterval(() => {
-                document.getElementById('val-btc').innerText = "BTC $" + (btc + (Math.random()*40-20)).toLocaleString(undefined, {maximumFractionDigits:0});
-                document.getElementById('val-kes').innerText = "KES " + (kes + (Math.random()*0.1-0.05)).toFixed(2);
-                document.getElementById('val-oee').innerText = (oee + (Math.random()*0.4-0.2)).toFixed(1) + "%";
-                createSparkline('chart-btc', 20); createSparkline('chart-kes', 10); createSparkline('chart-oee', 5);
+                let btcChange = (Math.random() * 40) - 20;
+                let kesChange = (Math.random() * 0.10) - 0.05;
+                
+                document.getElementById('val-btc').innerText = "BTC $" + (btc + btcChange).toLocaleString(undefined, {maximumFractionDigits:0});
+                document.getElementById('val-kes').innerText = "KES " + (kes + kesChange).toFixed(2);
+                document.getElementById('val-oee').innerText = (oee + (Math.random()*0.4 - 0.2)).toFixed(1) + "%";
+
+                createSparkline('chart-btc', 15, 20);
+                createSparkline('chart-kes', 15, 10);
+                createSparkline('chart-oee', 15, 5);
             }, 800);
         }
         updateFeeds();
 
+        // 🏛️ MATRIX CORE
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -202,6 +226,7 @@
         }
         setInterval(draw, 35);
 
+        // 🛡️ ANTI-BREACH
         document.onkeydown = (e) => {
             if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74))) {
                 document.getElementById('security-alert').style.display = 'flex';
