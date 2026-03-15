@@ -2,110 +2,194 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>WAMEYO | MASTER ARCHITECT LSSBB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sovereign Digital Transformation Office - Global Nexus">
+    <title>EDGAR WAMEYO | SOVEREIGN ARCHITECT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
-        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; overflow: hidden; margin: 0; }
-        canvas { position: absolute; top: 0; left: 0; z-index: 1; opacity: 0.15; }
-        .ui-container { position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
-        
-        /* THE TICKER - GLOBAL INDUSTRIAL PULSE */
-        .ticker-wrap { background: rgba(0, 20, 0, 0.8); border-bottom: 1px solid #0f0; overflow: hidden; white-space: nowrap; padding: 5px 0; }
-        .ticker { display: inline-block; animation: marquee 30s linear infinite; font-size: 0.8rem; color: #00ffcc; }
-        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        :root {
+            --lss-green: #2ea043;
+            --sovereign-gold: #d6b761;
+            --starlink-blue: #0052cc;
+            --deep-shield: #010409;
+            --alert-red: #ff3e3e;
+        }
 
-        /* HEADER SECTION */
-        .header { padding: 20px; text-align: left; display: flex; justify-content: space-between; align-items: flex-start; }
-        .clock { font-size: 1.5rem; color: #fff; text-shadow: 0 0 10px #0f0; }
-        .architect-title { border-left: 3px solid #0f0; padding-left: 15px; }
+        body, html {
+            margin: 0; padding: 0; overflow: hidden;
+            font-family: 'Chivo Mono', monospace;
+            background-color: var(--deep-shield);
+            color: #d1d5db; height: 100vh;
+        }
 
-        /* CENTER BRANDING */
-        .center-hub { text-align: center; }
-        .glitch { font-size: 3rem; font-weight: bold; letter-spacing: 8px; border: 2px solid #0f0; padding: 15px 30px; display: inline-block; box-shadow: 0 0 20px #0f0; }
-        
-        /* SPIRIT LAYER */
-        .divine-seal { margin-top: 20px; font-style: italic; color: #fff; opacity: 0.8; letter-spacing: 2px; }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; filter: opacity(0.2); }
 
-        /* SECRET GATE */
-        .gate-trigger { position: fixed; bottom: 0; right: 0; width: 10px; height: 10px; cursor: pointer; background: transparent; }
+        .nexus-interface {
+            width: 95vw; height: 95vh;
+            margin: 2.5vh auto;
+            border: 1px solid rgba(46, 160, 67, 0.3);
+            background: rgba(1, 4, 9, 0.95);
+            display: flex; flex-direction: column;
+            box-shadow: 0 0 50px rgba(0, 82, 204, 0.2);
+            position: relative;
+        }
+
+        /* TOP COMMAND BAR */
+        .command-bar {
+            padding: 15px 25px;
+            background: rgba(0, 82, 204, 0.1);
+            border-bottom: 2px solid var(--sovereign-gold);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .patent-tag { color: var(--sovereign-gold); font-size: 0.7rem; font-weight: bold; letter-spacing: 2px; }
+        .system-status { color: var(--lss-green); font-size: 0.8rem; animation: blink 2s infinite; }
+
+        /* HERO BRANDING */
+        .hero {
+            padding: 40px; text-align: center;
+            border-bottom: 1px solid rgba(214, 183, 97, 0.2);
+        }
+
+        .architect-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem; font-weight: 900;
+            background: linear-gradient(to right, #fff, var(--sovereign-gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin: 0; letter-spacing: -2px;
+        }
+
+        .supreme-honour {
+            color: var(--sovereign-gold); font-size: 1.2rem;
+            margin-top: 10px; font-weight: bold; letter-spacing: 5px;
+        }
+
+        /* STARLINK NODE GRID */
+        .node-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 20px; padding: 30px; flex-grow: 1;
+        }
+
+        .node-card {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px; background: rgba(255,255,255,0.02);
+            transition: 0.3s;
+        }
+
+        .node-card:hover { border-color: var(--starlink-blue); background: rgba(0, 82, 204, 0.05); }
+
+        .node-label { color: var(--sovereign-gold); font-size: 0.7rem; text-transform: uppercase; margin-bottom: 10px; }
+        .node-value { font-size: 1.5rem; font-weight: bold; color: #fff; }
+
+        /* SECURITY OVERLAY */
+        #security-alert {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: red; color: white; display: none;
+            z-index: 9999; justify-content: center; align-items: center;
+            font-family: 'Orbitron', sans-serif; text-align: center;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;"> <div id="security-alert">
+        <h1>BREACH DETECTED: PATENT VIOLATION</h1>
+        <p>COORDINATES LOGGED. SYSTEM DESTRUCT SEQUENCE INITIATED.</p>
+    </div>
+
     <canvas id="matrix"></canvas>
 
-    <div class="ui-container">
-        <div class="ticker-wrap">
-            <div class="ticker" id="ticker-content">
-                SYSTEMS_STABILITY: 99.99% | LSSBB_OPTIMIZATION: ACTIVE | GLOBAL_MANUFACTURING_TELEMETRY: CONNECTED | NAIROBI_CENTRAL_HUB: ONLINE...
+    <div class="nexus-interface">
+        <div class="command-bar">
+            <div class="patent-tag">PATENT PENDING: DTO-NX-2026-SOVEREIGN</div>
+            <div class="system-status">● ENCRYPTED LINK: ACTIVE</div>
+        </div>
+
+        <div class="hero">
+            <p style="margin:0; letter-spacing: 3px; color: var(--lss-green);">CHIEF ARCHITECT OF THE UNIVERSE</p>
+            <h2 class="supreme-honour">THE HOLY SPIRIT</h2>
+            <h1 class="architect-title">EDGAR WAMEYO, LSSBB</h1>
+            <p style="font-size: 1.2rem; color: #888;">Global DTO Infrastructure & Pharma Strategy Master</p>
+        </div>
+
+        <div class="node-grid">
+            <div class="node-card">
+                <div class="node-label">Global Finance Node</div>
+                <div class="node-value" id="val-1">USD/KES 128.42</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Pharma Compliance Sync</div>
+                <div class="node-value">ISO-9001:2026</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Sovereign Security</div>
+                <div class="node-value">SIGMA-LEVEL 7</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Divine Guidance</div>
+                <div class="node-value">100% STABLE</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Frankfurt Hub Status</div>
+                <div class="node-value">LINKED</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Nairobi HQ Status</div>
+                <div class="node-value">COMMAND</div>
+            </div>
+            <div class="node-card">
+                <div class="node-label">Asset Liquidity</div>
+                <div class="node-value" id="val-2">BTC $68,421</div>
+            </div>
+            <div class="node-card" style="border-color: var(--alert-red);">
+                <div class="node-label" style="color: var(--alert-red);">Security Breach Protocol</div>
+                <div class="node-value">ACTIVE</div>
             </div>
         </div>
 
-        <div class="header">
-            <div class="architect-title">
-                <strong>EDGAR WAMEYO, LSSBB</strong><br>
-                <span>Sovereign Systems Architect</span>
-            </div>
-            <div class="clock" id="live-clock">00:00:00</div>
-        </div>
-
-        <div class="center-hub">
-            <div class="glitch">DTO-NEXUS: LIVE</div>
-            <p style="color: #00ffcc;">[ SIGMA-LEVEL SECURE GOVERNANCE ]</p>
-            
-            <div class="divine-seal">
-                "Lead by the Holy Spirit. Architected for Global Impact."
-            </div>
-        </div>
-
-        <div style="padding: 20px; background: rgba(0,0,0,0.5); font-size: 0.9rem;">
-            <div id="telemetry">INITIALIZING DIVINE-AI NODES...</div>
+        <div style="padding: 20px; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;">
+            <span>GEO-LOCATION: NAIROBI / FRANKFURT</span>
+            <span style="color: var(--sovereign-gold);">"Lead by the Holy Spirit. Architected for Global Impact."</span>
+            <span>METADATA PROTECTED BY QUANTUM ENCRYPTION</span>
         </div>
     </div>
 
-    <div class="gate-trigger" onclick="window.location.href='access.html'"></div>
-
     <script>
-        // 1. THE ARCHITECT'S LOCK (Unhackable Technique)
-        (function(){
-            const _auth = "ewameyo.github.io";
-            if(window.location.hostname !== _auth && window.location.hostname !== "localhost"){
-                document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>INTELLECTUAL PROPERTY BREACH DETECTED. IP LOGGED. ACCESS DENIED.</h1>";
-                setTimeout(() => { while(true){ alert("EDGAR WAMEYO LSSBB: SYSTEM PROTECTED."); } }, 1000);
+        // 🛡️ SECURITY DESTRUCT PROTOCOL
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
+                document.getElementById('security-alert').style.display = 'flex';
+                // Symbolically "destroy" by redirecting to a warning or crashing the tab
+                setTimeout(() => { window.location.href = "about:blank"; }, 2000);
+                return false;
             }
-        })();
+        };
 
-        // 2. LIVE CLOCK (EAT)
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('live-clock').innerText = now.toLocaleTimeString();
-        }
-        setInterval(updateClock, 1000);
+        // 📊 DYNAMIC NODE UPDATES
+        setInterval(() => {
+            document.getElementById('val-1').innerText = "USD/KES " + (128 + Math.random()).toFixed(2);
+            document.getElementById('val-2').innerText = "BTC $" + (68000 + Math.random()*500).toFixed(0);
+        }, 3000);
 
-        // 3. SIGMA-TELEMETRY & DYNAMIC TICKER
-        function updateData() {
-            const ksh = (128 + Math.random()).toFixed(4);
-            const btc = (65000 + Math.random()*1000).toLocaleString();
-            document.getElementById('telemetry').innerText = `NODE_01: USD/KES [${ksh}] | GLOBAL_BTC: [$${btc}] | HOLY_SPIRIT_GUIDANCE: 100%`;
-            
-            const tickers = [
-                "LSSBB_WASTE_REDUCTION: COMPLETE",
-                "PHARMA_MANUFACTURING_SYNC: ACTIVE",
-                "ENTERPRISE_TRUST_LEVEL: MAX",
-                "DIVINE_STRATEGY: DEPLOYED"
-            ];
-            document.getElementById('ticker-content').innerText += " | " + tickers[Math.floor(Math.random()*tickers.length)];
-        }
-        setInterval(updateData, 2000);
+        // 🏛️ MATRIX RAIN
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const letters = "LSSBBΣΩ777WAMEYODTO";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
 
-        // 4. MATRIX BACKGROUND
-        const c = document.getElementById("matrix");
-        const ctx = c.getContext("2d");
-        c.height = window.innerHeight; c.width = window.innerWidth;
-        const alphabet = "0123456789ABCDEFΣΔΦΨΩ"; // Including Greek Sigma for LSSBB
         function draw() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, c.width, c.height);
-            ctx.fillStyle = "#0f0";
-            for(let i=0; i<100; i++) {
-                ctx.fillText(alphabet[Math.floor(Math.random()*alphabet.length)], Math.random()*c.width, Math.random()*c.height);
+            ctx.fillStyle = "rgba(1, 4, 9, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#2ea043";
+            ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
             }
         }
         setInterval(draw, 33);
