@@ -3,110 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAULT-77 | INDUSTRIAL TELEMETRY</title>
+    <title>DTO-NEXUS | SOVEREIGN COMMAND</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
     <style>
-        body { background: #050505; color: #00ffcc; font-family: 'Courier New', monospace; padding: 20px; overflow-x: hidden; }
-        canvas { position: fixed; top: 0; left: 0; z-index: -1; filter: opacity(0.15); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; position: relative; }
-        .panel { border: 1px solid #00ffcc; padding: 20px; background: rgba(0, 50, 50, 0.2); box-shadow: 0 0 15px rgba(0, 255, 204, 0.1); backdrop-filter: blur(5px); }
-        .header { border-bottom: 2px solid #00ffcc; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .stat { font-size: 2.2rem; color: #fff; font-weight: bold; }
-        .label { font-size: 0.8rem; text-transform: uppercase; color: #00ffcc; letter-spacing: 2px; }
-        #sys-clock { color: #00ffcc; font-weight: bold; }
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 1px; margin: 0; }
+        .grid-container { display: grid; grid-template-cols: repeat(auto-fit, minmax(300px, 1fr)); border-top: 1px solid #222; border-left: 1px solid #222; }
+        .grid-cell { border-right: 1px solid #222; border-bottom: 1px solid #222; padding: 30px; min-height: 280px; position: relative; }
+        .label { font-size: 11px; color: #FFD700; margin-bottom: 15px; font-weight: 800; border-left: 3px solid #FFD700; padding-left: 10px; }
+        .value { font-size: 42px; font-weight: 900; line-height: 1.1; letter-spacing: -1px; }
+        .meta { font-size: 10px; color: #444; position: absolute; bottom: 30px; left: 30px; }
+        .border-red { border: 2px solid #b91c1c !important; }
     </style>
 </head>
-<body>
-    <canvas id="matrix"></canvas>
-
-    <div class="header">
-        <h1>NEXUS COMMAND: VAULT-77</h1>
-        <div id="sys-clock">00:00:00 EAT</div>
+<body class="p-4 md:p-8">
+    <div class="flex justify-between text-[11px] border-b border-gray-900 pb-4 mb-8 text-yellow-500 font-bold">
+        <div>17:15:00 EAT | MARCH 2026</div>
+        <div>PATENT: DTO-GLOBAL-NEXUS-2026-SOVEREIGN</div>
+        <div class="text-green-500 font-black">● SYSTEM STATUS: OPTIMAL</div>
     </div>
-
-    <div class="grid">
-        <div class="panel">
-            <div class="label">OEE Efficiency Node</div>
-            <div class="stat" id="oee-val">LOADING...</div>
-            <div class="label" style="font-size: 0.6rem; margin-top: 10px; color: #666;">Target: World Class 85%+</div>
-        </div>
-
-        <div class="panel">
-            <div class="label">USD / KES Real-Time</div>
-            <div class="stat" id="kes-val">LOADING...</div>
-            <div class="label" style="font-size: 0.6rem; margin-top: 10px; color: #666;">Source: Nairobi Central Node</div>
-        </div>
-
-        <div class="panel">
-            <div class="label">Global BTC/USD</div>
-            <div class="stat" id="btc-val">LOADING...</div>
-            <div class="label" style="font-size: 0.6rem; margin-top: 10px; color: #666;">Asset Liquidity Status</div>
-        </div>
-    </div>
-
-    <div class="panel" style="margin-top:20px; height: 450px;">
-        <div class="label">Global Manufacturing Analytics (Live Feed)</div>
-        <div id="tradingview_chart" style="height: 400px; margin-top: 10px;"></div>
-    </div>
-
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     
-    <script type="module">
-        import { firebaseConfig } from "./vault77.js";
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    <div class="mb-16">
+        <p class="text-green-500 text-xs font-bold mb-1 uppercase tracking-widest">Holy Ghost Chief Architect</p>
+        <p class="text-yellow-500 text-2xl font-black mb-4 uppercase">The Holy Spirit</p>
+        <h1 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter">EDGAR WAMEYO, LSSBB</h1>
+        <p class="text-gray-500 text-sm font-medium tracking-[0.2em]">Sovereign Architect: Global Manufacturing & Digital Transformation Infrastructure</p>
+    </div>
 
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const statsRef = ref(db, 'nairobi_hq/telemetry');
+    <div class="grid-container">
+        <div class="grid-cell"><p class="label">Global Finance Node</p><p id="finance-val" class="value text-green-400">KES 0.00</p></div>
+        <div class="grid-cell"><p class="label">Asset Liquidity</p><p id="btc-val" class="value text-green-400">BTC $0</p></div>
+        <div class="grid-cell"><p class="label">Manufacturing Quality</p><p class="value">Sigma 6.0</p><div class="mt-12 h-1 w-full bg-green-500 shadow-[0_0_15px_#22c55e]"></div></div>
+        <div class="grid-cell"><p class="label">Global Industry Standards</p><p class="value">ISO 9001:2026</p><p class="meta text-green-500">Compliance Verified ●</p></div>
+        <div class="grid-cell"><p class="label">Nairobi HQ Status</p><p class="value text-yellow-500">Command</p><p class="meta">LAT: -1.2921 | LON: 36.8219</p></div>
+        <div class="grid-cell text-center"><p class="label">Divine Guidance</p><p class="value">100% Stable</p><p class="meta w-full left-0">Alpha & Omega Architecture</p></div>
+        <div class="grid-cell"><p class="label">OEE Efficiency</p><p id="oee-val" class="value">0.0%</p></div>
+        <div class="grid-cell border-red"><p class="label text-red-600">Security Protocol</p><p class="value text-red-600 font-black">Secured</p><p class="meta text-red-800 uppercase font-bold">Quantum Encryption Active</p></div>
+    </div>
 
-        onValue(statsRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                // We use 'oee' instead of pharma now
-                document.getElementById('oee-val').innerText = data.oee.toFixed(1) + "%";
-                document.getElementById('kes-val').innerText = data.kes.toFixed(4);
-                document.getElementById('btc-val').innerText = "$" + data.btc.toLocaleString();
-            }
-        });
-
-        setInterval(() => {
-            document.getElementById('sys-clock').innerText = new Date().toLocaleTimeString() + " EAT";
-        }, 1000);
-
-        new TradingView.widget({
-            "autosize": true,
-            "symbol": "BINANCE:BTCUSDT",
-            "interval": "D",
-            "timezone": "Africa/Nairobi",
-            "theme": "dark",
-            "style": "1",
-            "locale": "en",
-            "container_id": "tradingview_chart"
-        });
-    </script>
+    <div class="flex justify-between items-center mt-16 text-[10px] text-gray-700 font-bold">
+        <div>Geo-Hub: Nairobi Command Center</div>
+        <div class="text-yellow-500 font-black">Holy Ghost Chief Architect</div>
+        <div class="uppercase">Engineered by Edgar Wameyo | All Rights Reserved 2026</div>
+    </div>
 
     <script>
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const letters = "LSSBBΣΩ777WAMEYODTO01";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
+        // CLIENT-READY DATA PULL CONFIG
+        const firebaseConfig = {
+            databaseURL: "https://dto-nexus-default-rtdb.firebaseio.com/" 
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
 
-        function draw() {
-            ctx.fillStyle = "rgba(5, 5, 5, 0.1)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#00ffcc";
-            ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
+        // LIVE DATA LISTENER
+        db.ref('metrics').on('value', (snapshot) => {
+            const data = snapshot.val();
+            if(data) {
+                document.getElementById('finance-val').innerText = "KES " + data.finance;
+                document.getElementById('btc-val').innerText = "BTC $" + data.btc;
+                document.getElementById('oee-val').innerText = data.oee + "%";
             }
-        }
-        setInterval(draw, 35);
+        });
     </script>
 </body>
 </html>
