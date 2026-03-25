@@ -1,5 +1,5 @@
 export const firebaseConfig = {
-    apiKey: "AIzaSyAs-Actual-Key-From-Firebase-Settings", 
+    apiKey: "AIzaSyDXQbm3e89DvsVtfrbzRpds2Y8iCYu-gIw", 
     authDomain: "dto-nexus.firebaseapp.com",
     databaseURL: "https://dto-nexus-default-rtdb.firebaseio.com",
     projectId: "dto-nexus",
