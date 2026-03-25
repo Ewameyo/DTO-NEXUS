@@ -1,9 +1,9 @@
 export const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
+    apiKey: "AIzaSyAs-Actual-Key-From-Firebase-Settings", 
     authDomain: "dto-nexus.firebaseapp.com",
     databaseURL: "https://dto-nexus-default-rtdb.firebaseio.com",
     projectId: "dto-nexus",
     storageBucket: "dto-nexus.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    messagingSenderId: "920448206566",
+    appId: "1:920448206566:web:7f6d54625f828a27845f9a"
 };
